@@ -507,6 +507,7 @@ th:nth-child(3n) {
   }
   .gnb-title {
     font-size: .6rem;
+    text-align: right;
   }
 
   .gnb-navstuff {

@@ -4,12 +4,7 @@ var canvas = document.querySelector("canvas");
 var context = canvas.getContext("2d");
 
 var audioContext, gainNode, analyserNode, bufferLength, dataArray;
-var offlineAudioContext;
 function initializeAudio() {
-  // offlineAudioContext = new OfflineAudioContext();
-  // const bufferSource = new AudioBufferSourceNode(offlineAudioContext);
-  // const offlineAnalyser = new AnalyserNode(offlineAudioContext);
-
   audioContext = new AudioContext({
     latencyHint: "interactive"
   });
