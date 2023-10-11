@@ -172,7 +172,7 @@
       .video-page {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
       }
     </style>
     <style media="screen">
@@ -336,24 +336,24 @@
         }
       });
       main.addEventListener("touchmove", function(e) {
-        // if (e.touches && e.touches.length > 0) {
-        //   const touch = e.touches[0];
-        //
-        //   const dx = -(touch.pageX - previousTouch.pageX);
-        //   const dy = -(touch.pageY - previousTouch.pageY);
-        //
-        //   const ady = Math.abs(dy);
-        //   const adx = Math.abs(dx);
-        //   if (ady != adx) {
-        //     const newDirection = Math.sign(ady >= adx ? dy : dx);
-        //     if (newDirection != 0) scrollDirection = newDirection;
-        //
-        //     if (ady >= adx) {
-        //       this.scrollLeft += dy/6;
-        //     }
-        //   }
-        //   scrollJump.due = false;
-        // }
+        if (e.touches && e.touches.length > 0) {
+          const touch = e.touches[0];
+
+          const dx = -(touch.pageX - previousTouch.pageX);
+          const dy = -(touch.pageY - previousTouch.pageY);
+
+          const ady = Math.abs(dy);
+          const adx = Math.abs(dx);
+          if (ady != adx) {
+            const newDirection = Math.sign(ady >= adx ? dy : dx);
+            if (newDirection != 0) scrollDirection = newDirection;
+
+            // if (ady >= adx) {
+            //   this.scrollLeft += dy/6;
+            // }
+          }
+          scrollJump.due = false;
+        }
       });
       main.addEventListener("touchend", function(e) {
         scrolling = false;
