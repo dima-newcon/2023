@@ -430,7 +430,15 @@
       for (let i=0; i<keywordElements.length; i++) {
         let el = keywordElements[i];
         let pair = keywordPairs[i].split("/");
-        el.textContent = pair[i%2==translateFirst ? 0 : 1].trim();
+
+        let keyword;
+        if (pair.length < 2) {
+          keyword = pair[0];
+        } else {
+          keyword = pair[i%2==translateFirst ? 0 : 1];
+        }
+
+        el.textContent = keyword.trim();
       }
 
       let imgContainer = document.getElementsByClassName("imgcontainer")[0];
