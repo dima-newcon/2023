@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="utf-8">
+    <title>가치의 재생 | </title>
+    <link rel="icon" type="image/x-icon" href="../res/favicon.png">
+    <link rel="stylesheet" href="../css/global.css">
+    <style media="screen">
+      html {
+        --artist-color: white;
+      }
+
+      main.flexbox {
+        justify-content: start;
+      }
+
+      .flexbox {
+        padding: 1px;
+        padding-left: 0;
+        padding-right: 0;
+        gap: 0;
+      }
+
+      .gap {
+        gap: 1rem;
+      }
+
+      .grid {
+        border-bottom: 1px solid black;
+        height: 100%;
+      }
+      .g2 {
+        height: fit-content;
+      }
+
+      .black {
+        background: black;
+        gap: 1px;
+      }
+      .white {
+        background: white;
+      }
+
+      .box {
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        background: white;
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      #picture img, .imgcontainer img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
+      #picture .white {
+        width: 100%;
+        aspect-ratio: 1;
+      }
+
+      .imgcontainer {
+        border: 1px solid black;
+        border-left: none;
+        border-right: none;
+      }
+      .imgcontainer img {
+        cursor: pointer;
+      }
+      .imgcontainer iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+
+      }
+
+      #info {
+        font-weight: 900;
+      }
+      #info > * {
+        border-bottom: 1px solid black;
+      }
+      #info > *:last-child {
+        border: none;
+      }
+      #info > .flexbox {
+        padding: var(--gnb-padding);
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        height: 100%;
+      }
+      #info td {
+        height: 2.5em;
+        vertical-align: middle;
+      }
+      #info table, td, tr {
+        font-weight: inherit;
+      }
+      #info table {
+        margin-bottom: 4rem;
+        text-transform: uppercase;
+      }
+      #info > .flexbox > .flexbox {
+        margin-top: auto;
+        justify-content: start;
+        gap: 1rem 2rem;
+      }
+      #name-ko {
+        font-weight: inherit;
+        font-size: 1.3rem;
+        margin-bottom: .5rem;
+      }
+      #name-en {
+        font-size: 2rem;
+        font-weight: inherit;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+      }
+      .keyword {
+        padding: 1.5rem;
+        font-size: 2rem;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .role {
+        border: 1px solid black;
+        font-size: 1.5rem;
+        text-align: center;
+        padding: .25em;
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+      .role:first-child {
+        cursor: pointer;
+      }
+      .role:first-child, .flexbox > .scrolling-bar {
+        background: linear-gradient(to right, white 0%, var(--artist-color) 100%);
+      }
+
+      .margin {
+        height: 3rem;
+      }
+
+      #experience > .flexbox {
+        padding: var(--gnb-padding);
+        gap: 5rem;
+        width: 100%;
+        justify-content: start;
+      }
+      #experience h1 {
+        font-weight: 900;
+      }
+      .experience-li {
+        display: flex;
+        line-height: 1.75em;
+      }
+      .experience-li span:first-child {
+        white-space: pre;
+        flex-shrink: 0;
+      }
+      .experience-li span:last-child {
+        text-align: justify;
+        word-break: break-word;
+      }
+
+      .cd-container {
+        width: 45%;
+        display: flex;
+        justify-content: end;
+      }
+      .cd-wrapper {
+        width: 0;
+      }
+      .main-cd {
+        translate: -50% 0;
+      }
+
+      .flexbox > .scrolling-bar {
+        border-top: 1px solid black;
+        font-weight: 900;
+        color: black;
+        font-size: 1.5rem;
+      }
+      .flexbox > .scrolling-bar p {
+        padding-left: 2em;
+      }
+
+      footer {
+        margin-top: 15vh;
+      }
+
+      #roles-container {
+        flex-wrap: wrap;
+      }
+    </style>
+    <style media="screen">
+      @media (max-width: 480px) {
+        .box {
+          padding-left: var(--gnb-padding);
+          padding-right: var(--gnb-padding);
+        }
+        #info > .flexbox {
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .grid.g2 {
+          grid-template-columns: unset;
+        }
+
+        #experience > .flexbox {
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+      }
+
+      @media (max-width: 800px) {
+        .cd-container {
+          display: none;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .cd-container {
+          width: 35%;
+        }
+        .cd-wrapper {
+          position: relative;
+        }
+        .main-cd {
+          max-width: 40vw;
+          position: absolute;
+          top: 50%;
+          translate: -50% -50%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <header></header>
+
+    <main class="flexbox column">
+      <div class="flexbox wrap black">
+        <div class="box">
+          Credits
+          <button onclick="window.location.href = '../credits'">
+            <svg width="35" height="15" alt="돌아가기">
+              <line x1="0" y1="7.5" x2="35" y2="7.5" />
+              <line x1="0" y1="7.5" x2="7.5" y2="0" />
+              <line x1="0" y1="7.5" x2="7.5" y2="15" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="grid g2 black">
+        <div id="picture">
+          <div class="white">
+
+          </div>
+        </div>
+        <div class="flexbox column white" id="info">
+          <div class="flexbox column">
+            <h2 id="name-ko"></h2>
+            <h1 id="name-en"></h1>
+            <table>
+              <tr>
+                <td><img class="icon" src="../res/icons/web.png"></img></td>
+                <td id="email"></td>
+              </tr>
+              <tr>
+                <td><img class="icon" src="../res/icons/instagram.png"></img></td>
+                <td id="instagram"></td>
+              </tr>
+            </table>
+            <div id="roles-container" class="flexbox gap white">
+            </div>
+          </div>
+          <div class="white keyword"></div>
+          <div class="white keyword"></div>
+          <div class="white keyword"></div>
+        </div>
+      </div>
+      <div class="margin"></div>
+      <div class="imgcontainer black grid g3">
+      </div>
+      <div class="margin"></div>
+      <div id="experience" class="flexbox black">
+        <div class="flexbox gap white">
+          <h1>Experience</h1>
+          <div id="experience-list"></div>
+        </div>
+        <div class="white cd-container">
+          <div class="cd-wrapper">
+            <div class="main-cd"></div>
+          </div>
+        </div>
+      </div>
+      <div class="margin"></div>
+      <div class="scrolling-bar backwards">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+      </div>
+    </main>
+
+    <footer></footer>
+
+  </body>
+  <script defer type="text/javascript" src="../js/database.js"></script>
+  <script defer type="text/javascript" src="../js/dom/global.js"></script>
+  <script type="text/javascript">
+    const NAV_ID = "Credits";
+
+    window.onload = function() {
+      createCD(document.querySelector(".main-cd"));
+      createGNB(document.querySelector("header"));
+      createFooter(document.querySelector("footer"));
+      createImgDialog();
+      enableHashReloading();
+
+      loadDatabase("artists", function() {
+        const hash = decodeURIComponent(document.location.hash).replace("#","");
+        var linkedArtist;
+        if (hash) {
+          for (let artist in DATABASE.artists) {
+            var englishHash = DATABASE.artists[artist]["이름(영문)"].toLowerCase().replaceAll(" ","-");
+            if (hash == artist || hash == englishHash) {
+              linkedArtist = artist;
+              break;
+            }
+          }
+        }
+
+        if (linkedArtist) {
+          loadDatabase("teams", function() {
+            setupArtistInfo(linkedArtist);
+          });
+
+          var lowercase = DATABASE.artists[linkedArtist]["이름(영문)"].toLowerCase();
+          var englishName = "";
+          for (let part of lowercase.split(" ")) {
+            englishName += part.substring(0, 1).toUpperCase() + part.substring(1)+" ";
+          }
+          document.title = "가치의 재생 | "+englishName.toUpperCase();
+        } else {
+          window.location.href = "../credits/";
+        }
+      });
+    }
+
+    function setupArtistInfo(artist) {
+      let data = DATABASE.artists[artist];
+
+      let picture = document.createElement("img");
+      picture.src = "../res/artists/profiles/"+artist+".jpg";
+      picture.onload = function() {
+        document.getElementById("picture").firstElementChild.replaceWith(picture);
+      }
+
+      document.documentElement.style.setProperty("--artist-color", data["색상"]);
+
+      document.getElementById("name-ko").textContent = artist;
+      document.getElementById("name-en").textContent = data["이름(영문)"];
+
+      if (data["인스타"]) {
+        let instagram = document.createElement("a");
+        instagram.target = "_blank";
+        instagram.href = "https://www.instagram.com/"+data["인스타"].replace("@","");
+        instagram.textContent = data["인스타"];
+        document.getElementById("instagram").appendChild(instagram);
+      } else {
+        document.getElementById("instagram").parentElement.remove();
+      }
+
+      if (data["이메일"]) {
+        let email = document.createElement("a");
+        email.href = "mailto: "+data["이메일"];
+        email.textContent = data["이메일"];
+        document.getElementById("email").appendChild(email);
+      } else {
+        document.getElementById("email").parentElement.remove();
+      }
+
+      let roles = [];
+      for (let team in DATABASE.teams) {
+        if (DATABASE.teams[team]["팀원"].includes(artist)) {
+          roles.push(team);
+          break;
+        }
+      }
+      roles = roles.concat(data["역할"].split(","));
+
+      let rolesContainer = document.getElementById("roles-container");
+      for (let role of roles) {
+        let div = document.createElement("div");
+        div.className = "role";
+        div.textContent = role;
+        rolesContainer.appendChild(div);
+        if (role in DATABASE.teams) {
+          div.onclick = function() {
+            location.href = "../introduction/#"+role;
+          }
+        }
+      }
+
+      let keywordElements = document.getElementsByClassName("keyword");
+      let keywordPairs = data["키워드"].split("\n");
+      let translateFirst = Math.round(Math.random());
+      for (let i=0; i<keywordElements.length; i++) {
+        let el = keywordElements[i];
+        let pair = keywordPairs[i].split("/");
+        el.textContent = pair[i%2==translateFirst ? 0 : 1].trim();
+      }
+
+      let imgContainer = document.getElementsByClassName("imgcontainer")[0];
+      let imgs = [data["이미지1"], data["이미지2"], data["이미지3"]];
+      for (let img of imgs) {
+        let el = document.createElement("img");
+        el.src = "../res/artists/"+artist+"/"+img;
+        el.onclick = function() {
+          imgDialog.querySelector("img").src = this.src;
+          imgDialog.showModal();
+        };
+
+        if (artist == "진규원" && img == "2.png") {
+          el = document.createElement("iframe");
+          el.src = "https://quewon.github.io/petri-2/";
+          el.onclick = null;
+        }
+
+        imgContainer.appendChild(el);
+      }
+
+      let experiences = data["경험"].split("\n");
+      for (let string of experiences) {
+        if (string.trim() == "") continue;
+
+        let split = string.split(" | ");
+
+        let div = document.createElement("div");
+        div.className = "experience-li";
+
+        let year = document.createElement("span");
+        year.textContent = split[0]+" | ";
+        let content = document.createElement("span");
+        content.textContent = split[1].trim();
+        div.appendChild(year);
+        div.appendChild(content);
+
+        document.getElementById("experience-list").appendChild(div);
+      }
+
+      let scrollingTexts = document.getElementsByClassName("scrolling-bar")[0].querySelectorAll("p");
+      for (let p of scrollingTexts) {
+        p.textContent = data["나를 표현하는 한 문장"];
+      }
+    }
+  </script>
+</html>

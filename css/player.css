@@ -1,0 +1,109 @@
+html, body {
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  position: fixed;
+  font-family: sans-serif;
+  width: 100vw;
+  height: 100dvh;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  pointer-events: none;
+}
+
+.cd {
+  position: absolute;
+  translate: -50% -50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.cd {
+  cursor: grab;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, .1));
+  /* border: 1px solid rgba(0,0,0,.1); */
+}
+.cd.dragging {
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, .3));
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+html.dragging, html.dragging * {
+  cursor: grabbing;
+}
+
+html {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.tray {
+  display: flex;
+  gap: 4rem;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  translate: 100% -50%;
+  /* padding-left: 4rem; */
+  /* box-sizing: border-box; */
+  padding-right: 4rem;
+  width: 37.5vw;
+  transition: translate 1s;
+  z-index: 2;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.tray::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+.tray.open {
+  translate: 0 -50%;
+}
+.tray .cd {
+  position: relative;
+  left: 0 !important;
+  top: 0 !important;
+  translate: 0 0;
+}
+
+#toggle-tray-button {
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 1rem);
+  translate: -100% -50%;
+  transition: left 1s, translate 1s;
+  z-index: 3;
+  width: 3rem;
+}
+#toggle-tray-button.open {
+  left: 50%;
+  translate: -50% -50%;
+}
+#toggle-tray-button img {
+  width: inherit;
+}
+#toggle-tray-button.open img {
+  scale: -1 1;
+}

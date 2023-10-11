@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="utf-8">
+    <title>가치의 재생 | 작품소개</title>
+    <link rel="icon" type="image/x-icon" href="../res/favicon.png">
+    <link rel="stylesheet" href="../css/global.css">
+    <style media="screen">
+      .flexbox {
+        padding: 1px;
+        padding-left: 0;
+        padding-right: 0;
+        gap: 0;
+      }
+
+      .gap {
+        gap: 1rem;
+      }
+
+      #teams-intro > .grid, #team-intro > .grid {
+        border-bottom: 1px solid black;
+      }
+
+      .card-cd, #ti-cd {
+        margin: auto;
+        border-radius: 50%;
+        box-shadow: 2px 2px 5px rgba(0,0,0,.16);
+      }
+
+      /*  */
+
+      .teams-intro main {
+        height: 100dvh;
+      }
+
+      #teams-intro {
+        justify-content: start;
+        height: 100%;
+      }
+
+      .black {
+        background: black;
+        gap: 1px;
+      }
+      .white {
+        background: white;
+      }
+
+      .teams-intro .grid {
+        border-bottom: 1px solid black;
+        height: 100%;
+      }
+
+      .box {
+        flex-grow: 1;
+      }
+      .box:first-child {
+        width: calc(50% + 1px);
+      }
+      .box:last-child {
+        width: calc(50% - 2px);
+      }
+      .box, .card {
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        background: white;
+      }
+
+      .card {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      svg, ellipse {
+        transform: translate3d(0px, 0px, 0px);
+      }
+      .card svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .card * {
+        z-index: 1;
+      }
+
+      .card-team {
+        font-weight: 900;
+      }
+      .card-title {
+
+      }
+      .card .flexbox {
+        gap: 1rem;
+      }
+      .card-members {
+
+      }
+      .card-cd {
+        max-width: 50%;
+      }
+
+      /* 상세페이지 */
+
+      #ti-cd {
+        max-width: 60%;
+        margin: 15% auto;
+      }
+
+      #ti-info {
+        gap: 7rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        white-space: pre-wrap;
+      }
+
+      #ti-title {
+        font-size: 2rem;
+      }
+
+      #ti-video {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 560/315;
+      }
+
+      #ti-desc {
+        line-height: 1.5em;
+      }
+      #ti-desc span {
+        display: inline-block;
+      }
+
+      .team-intro .grid > div {
+        padding: 1.5rem;
+        box-sizing: border-box;
+      }
+
+      .half {
+        width: 50%;
+      }
+
+      .profile {
+        padding: 0 !important;
+      }
+      .profile > img {
+        width: 100%;
+        flex-grow: 1;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      .profile > div div {
+        background: white;
+      }
+      .profile .g2 {
+        grid-template-columns: 7rem 1fr;
+      }
+      .profile > div div:first-child {
+        border-right: 1px solid black;
+      }
+      .profile .icon {
+        height: 1em;
+      }
+      .profile > div div {
+        padding: .5rem !important;
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+      }
+
+      .imgcontainer {
+        width: 100vw;
+        height: fit-content;
+      }
+      .imgcontainer img {
+        width: 100%;
+        background: white;
+        cursor: pointer;
+      }
+      .imgcontainer.g3 img {
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
+
+      .team-intro footer {
+        margin-top: 15vh;
+      }
+
+      #ti-prev, #ti-next {
+        width: 30%;
+        position: relative;
+        overflow: hidden;
+      }
+      #ti-prev {
+        text-align: left;
+      }
+      #ti-next {
+        text-align: right;
+        direction: rtl;
+      }
+    </style>
+    <style media="screen">
+      @media (max-width: 480px) {
+        .box, .card {
+          font-size: .8rem;
+          padding-left: var(--gnb-padding);
+          padding-right: var(--gnb-padding);
+        }
+
+        .team-intro .grid > div {
+          padding: var(--gnb-padding);
+        }
+
+        .team-info {
+          flex-direction: column;
+        }
+        .team-info > .flexbox {
+          width: 70% !important;
+          gap: 1rem;
+        }
+        .half {
+          width: 100%;
+        }
+        #ti-info {
+          gap: 2rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        #ti-profiles {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 700px) {
+        #team-intro > .grid.g2 {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 800px) {
+        .card-cd {
+          max-width: 80%;
+        }
+      }
+
+      @media (max-width: 900px) and (min-width: 600px) {
+        #ti-profiles.g3::after {
+          content: "";
+          background: white;
+          display: block;
+        }
+      }
+
+      @media (max-width: 900px) {
+        #ti-cd {
+          max-width: 80%;
+        }
+        #team-intro > .grid.g2 {
+          grid-template-columns: 40% 60%;
+        }
+        #team-intro > #ti-profiles {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        #card-container {
+          grid-template-columns: calc(50% + 1px) 50%;
+          height: fit-content;
+        }
+        .card {
+          height: 50dvh;
+        }
+        .teams-intro main {
+          height: unset;
+        }
+        footer {
+          margin-top: 15vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <main>
+      <header></header>
+
+      <div id="teams-intro" class="flexbox column gone">
+        <div class="flexbox wrap black">
+          <div class="box">작품소개</div>
+          <div class="box">NEW MEDIA ART EXHIBITION COLLABORATION PROJECT</div>
+        </div>
+        <div id="card-container" class="grid g4 black">
+        </div>
+      </div>
+
+      <div id="team-intro" class="flexbox column gone">
+        <div class="flexbox wrap black">
+          <div class="box" id="ti-team"></div>
+        </div>
+        <div class="grid g2 black">
+          <div class="flexbox white column">
+            <button onclick="window.location.href = window.location.href.split('#')[0]">
+              <svg width="35" height="15" alt="돌아가기">
+                <line x1="0" y1="7.5" x2="35" y2="7.5" />
+                <line x1="0" y1="7.5" x2="7.5" y2="0" />
+                <line x1="0" y1="7.5" x2="7.5" y2="15" />
+              </svg>
+            </button>
+            <img id="ti-cd" src="" alt="">
+            <div class="flexbox gap">
+              <button id="ti-prev">
+                <svg width="300" height="15" alt="이전 팀">
+                  <line x1="0" y1="7.5" x2="300" y2="7.5" />
+                  <line x1="0" y1="7.5" x2="7.5" y2="0" />
+                  <line x1="0" y1="7.5" x2="7.5" y2="15" />
+                </svg>
+              </button>
+              <button id="ti-next">
+                <svg width="300" height="15" alt="다음 팀">
+                  <line x1="300" y1="7.5" x2="0" y2="7.5" />
+                  <line x1="300" y1="7.5" x2="292.5" y2="0" />
+                  <line x1="300" y1="7.5" x2="292.5" y2="15" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="flexbox column white" id="ti-info">
+            <div class="flexbox column gap">
+              <div class="">TITLE</div>
+              <div class="flexbox gap team-info">
+                <div class="flexbox column half" style="width: 40%">
+                  <div id="ti-title"></div>
+                  <div id="ti-type">
+
+                  </div>
+                </div>
+                <div id="ti-desc" class="half text-justify">
+
+                </div>
+              </div>
+            </div>
+            <iframe id="ti-video" src="https://www.youtube-nocookie.com/embed/zHaEQ-tiMZo?si=D4YOdieIYAsYH19z" width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div id="ti-profiles" class="grid black">
+
+        </div>
+        <div style="height: 7rem;"></div>
+        <div class="imgcontainer black grid" style="border-top: 1px solid black">
+
+        </div>
+        <div class="imgcontainer black grid g3">
+
+        </div>
+        <div class="imgcontainer black grid">
+
+        </div>
+      </div>
+    </main>
+
+    <footer></footer>
+
+    <svg style="position: absolute; height: 0px;">
+      <defs>
+        <filter id="goo-filter">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"/>
+        </filter>
+      </defs>
+    </svg>
+
+  </body>
+  <script defer type="text/javascript" src="../js/toolbox.js"></script>
+  <script defer type="text/javascript" src="../js/database.js"></script>
+  <script defer type="text/javascript" src="../js/dom/global.js"></script>
+  <script type="text/javascript">
+    const NAV_ID = "Introduction";
+
+    window.onload = function() {
+      createGNB(document.querySelector("header"));
+      createFooter(document.querySelector("footer"));
+      enableHashReloading();
+
+      loadDatabase("teams", function() {
+        const hash = decodeURIComponent(document.location.hash).replace("#","");
+        if (hash && hash in DATABASE.teams) {
+          loadDatabase("artists", function() {
+            document.getElementById("team-intro").classList.remove("gone");
+            document.body.classList.add("team-intro");
+            fillTeamInfo(hash);
+          });
+        } else {
+          document.getElementById("teams-intro").classList.remove("gone");
+          document.body.classList.add("teams-intro");
+          initTeamsIntro();
+        }
+      });
+    }
+
+    function fillTeamInfo(teamName) {
+      document.title = "가치의 재생 | "+teamName;
+
+      document.getElementById("ti-team").textContent = teamName;
+
+      document.getElementById("ti-cd").src = "../res/teams/"+teamName+"/cd.png";
+
+      const data = DATABASE.teams[teamName];
+      document.getElementById("ti-title").textContent = data["작품명"];
+      document.getElementById("ti-type").textContent = "2023\r\n"+data["분야"];
+
+      const desc = data["설명"];
+      if (desc.includes("<")) {
+        var string = "";
+        for (let word of desc.split(" ")) {
+          string += "<span>"+word+" </span>";
+        }
+        document.getElementById("ti-desc").innerHTML = string;
+      } else {
+        document.getElementById("ti-desc").textContent = desc;
+      }
+
+      if (data["영상"]) document.getElementById("ti-video").src = data["영상"];
+
+      var teamNames = Object.keys(DATABASE.teams);
+      var teamIndex = teamNames.indexOf(teamName);
+      var prevTeam = teamIndex > 0 ? teamNames[teamIndex-1] : teamNames[teamNames.length - 1];
+      var nextTeam = teamIndex < teamNames.length-1 ? teamNames[teamIndex+1] : teamNames[0];
+
+      const artists = data["팀원"].split(",");
+      document.getElementById("ti-profiles").classList.add("g"+artists.length);
+      for (let artist of artists) {
+        addProfile(artist);
+      }
+
+      document.getElementById("ti-prev").onclick = function() {
+        window.location.href = window.location.href.split('#')[0]+"#"+prevTeam;
+      };
+      document.getElementById("ti-next").onclick = function() {
+        window.location.href = window.location.href.split('#')[0]+"#"+nextTeam;
+      };
+
+      createImgDialog();
+
+      let containers = document.getElementsByClassName("imgcontainer");
+      let imgs = [
+        data["이미지1"],
+        data["이미지2"],
+        data["이미지3"],
+        data["이미지4"],
+        data["이미지5"]
+      ];
+      for (let i=0; i<imgs.length; i++) {
+        let el = document.createElement("img");
+        el.src = "../res/teams/"+teamName+"/"+imgs[i];
+        el.onclick = function() {
+          imgDialog.querySelector("img").src = this.src;
+          imgDialog.showModal();
+        };
+        imgs[i] = el;
+      }
+      let imgIndex = 0;
+      for (let container of containers) {
+        if (container.classList.contains("g3")) {
+          for (let i=0; i<3; i++) {
+            container.appendChild(imgs[imgIndex]);
+            imgIndex++;
+          }
+        } else {
+          container.appendChild(imgs[imgIndex]);
+          imgIndex++;
+        }
+      }
+    }
+
+    function addProfile(artist) {
+      const data = DATABASE.artists[artist];
+
+      const profile = document.createElement("div");
+      profile.className = "profile flexbox column black";
+      document.getElementById("ti-profiles").appendChild(profile);
+
+      const img = document.createElement("img");
+      img.src = "../res/artists/profiles/"+artist+".jpg";
+      img.onclick = function() {
+        location.href = "../portfolio/#"+data["이름(영문)"].toLowerCase().replaceAll(" ","-");
+      }
+      profile.appendChild(img);
+
+      var info = [{
+        icon: "../res/icons/user.png",
+        text: "<a href='../portfolio#"+data["이름(영문)"].toLowerCase().replaceAll(" ","-")+"'>"+artist+"</a>"
+      }];
+      if (data["인스타"] && data["인스타"].trim() != "") {
+        info.push({
+          icon: "../res/icons/instagram.png",
+          text: "<a target='_blank' href='https://www.instagram.com/"+data["인스타"].replace("@","")+"/'>"+data["인스타"]+"</a>"
+        });
+      }
+      if (data["이메일"] && data["이메일"].trim() != "") {
+        info.push({
+          icon: "../res/icons/mail.png",
+          text: "<a href='mailto:"+data["이메일"]+"'>"+data["이메일"]+"</a>"
+        });
+      }
+
+      for (let d of info) {
+        const bar = document.createElement("div");
+        bar.className = "grid g2";
+
+        const iconBox = document.createElement("div");
+        const icon = document.createElement("img");
+        icon.className = "icon";
+        icon.src = d.icon;
+        iconBox.appendChild(icon);
+        bar.appendChild(iconBox);
+
+        const textBox = document.createElement("div");
+        textBox.innerHTML = d.text;
+        bar.appendChild(textBox);
+
+        profile.appendChild(bar);
+      }
+    }
+  </script>
+  <script defer type="text/javascript" src="../js/dom/intro.js"></script>
+</html>

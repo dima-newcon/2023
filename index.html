@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="exhibit, new media, 뉴미디어콘텐츠과, 동아방송예술대학교, 경기아트센터, 뉴미디어, 미디어아트, 전시">
+    <title>가치의 재생 | Main</title>
+    <link rel="icon" type="image/x-icon" href="res/favicon.png">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="preload" as="image" href="res/maincd.png">
+    <link rel="preload" as="image" href="res/cutout.jpg">
+    <style media="screen">
+      body, html {
+        overflow: hidden;
+      }
+
+      .gnb {
+        position: fixed;
+        height: 100dvh;
+      }
+      body.nav-dropdown main > *,
+      body.nav-dropdown footer {
+        display: unset;
+      }
+
+      .main-cd {
+        position: fixed;
+        max-width: 70%;
+        max-height: 70%;
+        top: 50%;
+        left: 100%;
+        translate: 0 -50%;
+      }
+
+      main {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100dvh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow: scroll;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        /* scroll-snap-type: x mandatory; */
+
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+      main::-webkit-scrollbar {
+        display: none;
+      }
+      /* main.wheel {
+        scroll-snap-type: unset;
+      } */
+      .page {
+        width: 100vw;
+        height: 100dvh;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        position: relative;
+        scroll-snap-align: center;
+      }
+      .keywords-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: calc(min(30vw, 30dvh) + 8rem);
+        padding-right: 8rem;
+        gap: 1rem;
+      }
+      .keywords-page .gnb-h1 {
+        display: inline-block;
+        margin-bottom: 1rem;
+        font-size: 2.25rem;
+      }
+      .keywords-page > div {
+        opacity: .1;
+        transition: opacity .3s;
+        cursor: default;
+      }
+      .keywords-page > div:hover {
+        opacity: 1;
+      }
+      .big {
+        font-size: 1.5em;
+        font-weight: bold;
+        line-height: 1rem;
+      }
+      .footer-page > div {
+        position: absolute;
+        width: 100%;
+        padding: var(--gnb-padding);
+        padding-bottom: 6rem;
+        box-sizing: border-box;
+        top: calc(50% + 3rem);
+      }
+      .footer-page h1 {
+        margin: 0;
+        font-size: 3.7rem;
+        font-weight: 900;
+        /* align-self: end; */
+      }
+      .footer-image {
+        width: 100vw;
+        height: 50dvh;
+        margin-bottom: 4rem;
+        margin-left: calc(-1 * var(--gnb-padding));
+
+        background-image: url('res/cutout.jpg');
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      .page-nav, .scroll-icon {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        translate: -50% -50%;
+        opacity: 0;
+        transition: opacity .5s;
+      }
+      .page-nav {
+        display: flex;
+        gap: 1em;
+        font-size: 8px;
+        bottom: 2.5rem;
+        pointer-events: none;
+      }
+      .page-nav-button {
+        height: 1em;
+        width: 1em;
+        border-radius: 1em;
+        background: rgba(0,0,0,.1);
+        cursor: pointer;
+        transition: width .3s;
+        pointer-events: auto;
+      }
+      body.page0 .page-nav-button:nth-child(1),
+      body.page1 .page-nav-button:nth-child(1),
+      body.page2 .page-nav-button:nth-child(2),
+      body.page3 .page-nav-button:nth-child(3) {
+        width: 6em;
+        pointer-events: none;
+      }
+
+      .scroll-icon {
+        width: 3.5rem;
+        height: unset;
+        aspect-ratio: 1;
+      }
+      body.page0 .scroll-icon,
+      body.page1 .page-nav,
+      body.page2 .page-nav,
+      body.page3 .page-nav {
+        opacity: 1;
+      }
+
+      th, td {
+        padding: 1em;
+        padding-bottom: 0;
+      }
+
+      iframe {
+        width: 70%;
+        height: unset;
+        aspect-ratio: 560/315;
+      }
+
+      .video-page {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    </style>
+    <style media="screen">
+      /* smartphones, iPhone, portrait 480x320 phones */
+      @media (max-width:480px) {
+        .keywords-page {
+          padding: var(--gnb-padding);
+          font-size: .7rem;
+          justify-content: space-evenly;
+        }
+        .keywords-page div {
+          opacity: 1;
+        }
+        .keywords-page .gnb-h1 {
+          margin-bottom: 0;
+          font-size: 1.8rem;
+        }
+        p {
+          margin-bottom: .5em;
+        }
+        .big {
+          line-height: 1.5em;
+        }
+
+        iframe {
+          width: 90%;
+        }
+
+        .text-align-right {
+          direction: rtl;
+        }
+
+        .scroll-icon {
+          width: 2.5rem;
+        }
+        .page-nav {
+          bottom: 1rem;
+        }
+
+        .footer-page > div {
+          font-size: .8rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        th, td {
+          display: inline-block;
+          padding: 0;
+        }
+        th, th:nth-child(3n) {
+          display: block;
+          text-align: left;
+          padding: 0;
+          padding-left: 0 !important;
+          padding-bottom: .5rem;
+        }
+        td {
+          padding-bottom: 1rem;
+        }
+        .footer-image {
+          height: 20dvh;
+          margin-bottom: 0;
+        }
+        .footer-page > div {
+          top: calc(50% + 2rem);
+        }
+      }
+
+      @media (max-width: 700px) {
+        th:nth-child(3n) {
+          padding-left: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="main-bg-title">
+      <div class="main-bg-title-1">가치의</div>
+      <div class="main-bg-title-2">재生</div>
+    </div>
+    <div class="main-cd"></div>
+    <img class="scroll-icon icon" src="res/icons/scroll.png">
+
+    <main>
+      <div class="page">
+
+      </div>
+      <div class="page keywords-page">
+        <div>
+          <p><span class="gnb-h1">EXPERIENCE</span></p>
+          <p>본 전시는 독창적 시야로 통찰한 세상을 뉴미디어를 통해 마주함으로써</p>
+          <p>다채로운 <span class="big">예술적 가치</span>를 상기하고자 기획되었다.</p>
+          <p>각 팀의 작품을 통해 생산자와 소비자, 온 · 오프라인을 초월한</p>
+          <p><span class="big">뉴미디어 시대</span>의 새로운 콘텐츠 문화 양상을 제시하고자 한다.</p>
+          <p>팀만의 대표 이미지가 담긴 각 전시의 CD 재생버튼을 누르며 전시는 시작된다.</p>
+        </div>
+        <div class="text-align-right">
+          <p><span class="gnb-h1">REGENERATION</span></p>
+          <p>주최자는 그들만의 독자적인 시선과 뉴미디어를 통해 </p>
+          <p>고루한 일상 속 미처 자각하지 못하고 있던 새로운 질문을 던진다.</p>
+          <p>그리고 그 과정에서 감상자가 기존의 통념을 자각하고 주제에 대한 새로운 가치를 상기할 수 있도록 한다.</p>
+          <p>이렇게 본 전시는 <span class="big">“가치를 재생하다”</span> 라는 슬로건에 맞게 </p>
+          <p>공감각을 통한 예술적 소통을 권하며 <span class="big">기존의 가치 그 이상의 무한한 가능성</span>을 보여주고자 한다.</p>
+        </div>
+      </div>
+      <div class="page video-page">
+        <iframe src="https://www.youtube-nocookie.com/embed/zHaEQ-tiMZo?si=D4YOdieIYAsYH19z" width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="page footer-page">
+        <div class="absolute-center flexbox column">
+          <div class="footer-image"></div>
+          <div>
+            2023 경기아트센터 X 동아방송예술대학교 뉴미디어 아트 전시 협업 프로젝트
+          </div>
+          <div class="flexbox">
+            <h1>가치의 재생</h1>
+            <table>
+              <tr>
+                <th>기 간</th>
+                <td>2023.10.17 - 10.18</td>
+                <th>시 간</th>
+                <td>10AM - 7PM</td>
+              </tr>
+              <tr>
+                <th>장 소</th>
+                <td>경기아트센터 B1 갤러리</td>
+                <th>주 소</th>
+                <td>동아방송예술대학교 뉴미디어콘텐츠과 | 경기아트센터 뉴미디어팀</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="page-nav">
+      <div class="page-nav-button" onclick="jumpTo(1)"></div>
+      <div class="page-nav-button" onclick="jumpTo(2)"></div>
+      <div class="page-nav-button" onclick="jumpTo(3)"></div>
+    </div>
+
+    <header></header>
+
+  </body>
+  <script defer type="text/javascript" src="js/toolbox.js"></script>
+  <script defer type="text/javascript" src="js/dom/global.js"></script>
+  <script defer type="text/javascript">
+    const NAV_ID = "Home";
+    const SCROLL_SNAP = false;
+
+    window.onload = function() {
+      createCD(document.querySelector(".main-cd"));
+      createGNB(document.querySelector("header"));
+
+      main.addEventListener("touchstart", function(e) {
+        if (e.touches && e.touches.length > 0) {
+          scrollJump.due = false;
+          scrolling = true;
+          previousTouch = e.touches[0];
+        }
+      });
+      main.addEventListener("touchmove", function(e) {
+        // if (e.touches && e.touches.length > 0) {
+        //   const touch = e.touches[0];
+        //
+        //   const dx = -(touch.pageX - previousTouch.pageX);
+        //   const dy = -(touch.pageY - previousTouch.pageY);
+        //
+        //   const ady = Math.abs(dy);
+        //   const adx = Math.abs(dx);
+        //   if (ady != adx) {
+        //     const newDirection = Math.sign(ady >= adx ? dy : dx);
+        //     if (newDirection != 0) scrollDirection = newDirection;
+        //
+        //     if (ady >= adx) {
+        //       this.scrollLeft += dy/6;
+        //     }
+        //   }
+        //   scrollJump.due = false;
+        // }
+      });
+      main.addEventListener("touchend", function(e) {
+        scrolling = false;
+      });
+
+      main.addEventListener("wheel", function(e) {
+        this.scrollLeft += e.deltaY/2;
+
+        const ady = Math.abs(e.deltaY);
+        const adx = Math.abs(e.deltaX);
+        if (ady != adx) {
+          const newDirection = Math.sign(ady >= adx ? e.deltaY : e.deltaX);
+          if (newDirection != 0) scrollDirection = newDirection;
+        }
+
+        scrollJump.due = false;
+        scrolling = true;
+        clearTimeout(wheelTimeout);
+        wheelTimeout = setTimeout(function() {
+          scrolling = false;
+        }, 16);
+      });
+      document.addEventListener("keydown", function(e) {
+        switch (e.key) {
+          case "ArrowLeft":
+          case "ArrowUp":
+            jumpTo(Math.max(0, realCurrentPage-1));
+            scrollDirection = -1;
+            break;
+          case "ArrowRight":
+          case "ArrowDown":
+            jumpTo(Math.min(pages.length-1, realCurrentPage+1));
+            scrollDirection = 1;
+            break;
+        }
+      });
+
+      _previousFrame = new Date();
+      window.addEventListener("focus", function() {
+        _previousFrame = Date.now();
+      });
+      animate();
+    }
+
+    const pages = document.querySelectorAll(".page");
+    const footerImage = document.querySelector(".footer-image");
+    const main = document.querySelector("main");
+    var realCurrentPage;
+    var currentPage;
+    var currentLerpFactor;
+    var _previousFrame;
+    var wheelTimeout;
+    var scrolling = false;
+    var scrollDirection = 0;
+    var previousTouch;
+    function animate() {
+      const now = new Date();
+      const delta = now - _previousFrame;
+      _previousFrame = now;
+
+      if (scrollJump.due) {
+        scrollJump.elapsed += delta;
+        main.scrollLeft = lerp(scrollJump.initial, scrollJump.destination, smoothstep(Math.min(scrollJump.elapsed/scrollJump.duration, 1)));
+        document.body.className = "page"+scrollJump.destinationPage;
+        if (scrollJump.elapsed >= scrollJump.duration) {
+          scrollJump.due = false;
+        }
+      }
+
+      const scroll = main.scrollLeft;
+      const clampedScroll = Math.max(0, scroll);
+
+      currentPage=-1;
+      for (let page of pages) {
+        if (clampedScroll < page.offsetLeft) {
+          break;
+        }
+        currentPage++;
+      }
+
+      realCurrentPage = currentPage;
+      if (!scrollJump.due) document.body.className = "page"+currentPage;
+
+      if (currentPage >= pages.length - 1) {
+        currentPage = pages.length - 2;
+        currentLerpFactor = 1;
+      } else {
+        currentLerpFactor = (scroll - pages[currentPage].offsetLeft) / pages[currentPage].offsetWidth;
+      }
+
+      if (SCROLL_SNAP) {
+        if (!scrollJump.due && !scrolling && currentLerpFactor != 0) {
+          if (scrollDirection >= 0) {
+            jumpTo(currentPage+1);
+          } else {
+            jumpTo(currentPage);
+          }
+        }
+      }
+
+      const offsetX = Math.min(0, scroll - pages[3].offsetLeft);
+      footerImage.style.backgroundPosition = offsetX+"px 50%";
+
+      updateCDIntro();
+      lerpElementStyles();
+
+      requestAnimationFrame(animate);
+    }
+
+    var scrollJump = {
+      due: false,
+      duration: 300,
+      elapsed: 0,
+      initial: 0,
+      destination: 0,
+      destinationPage: 0
+    }
+    function jumpTo(page) {
+      scrollJump.initial = main.scrollLeft;
+      scrollJump.destinationPage = page;
+      scrollJump.destination = pages[page].offsetLeft;
+      scrollJump.elapsed = 0;
+      scrollJump.due = true;
+    }
+
+    const elementStyleLerp = [
+      {
+        element: ".main-cd", //for some reason, i can't just initialize it here
+        sectionStyles: [
+          {
+            "left": [50, "%"],
+            "translate": [-50, "% -50%"],
+          },
+          {
+            "left": [0, "%"],
+            "translate": [-50, "% -50%"],
+          },
+          {
+            "left": [0, "%"],
+            "translate": [-100, "% -50%"],
+          },
+          {
+            "left": [0, "%"],
+            "translate": [-100, "% -50%"],
+          }
+        ]
+      },
+      {
+        element: ".footer-image",
+        sectionStyles: [
+          {
+            "translate": [50, "% 0"],
+          },
+          {
+            "translate": [50, "% 0"],
+          },
+          {
+            "translate": [50, "% 0"],
+          },
+          {
+            "translate": [0, "% 0"],
+          }
+        ]
+      },
+      {
+        element: ".text-align-right",
+        sectionStyles: [
+          {
+            "translate": [50, "% 0"],
+          },
+          {
+            "translate": [0, "% 0"],
+          },
+          {
+            "translate": [-50, "% 0"],
+          },
+          {
+            "translate": [-50, "% 0"],
+          }
+        ]
+      },
+      {
+        element: ".main-bg-title",
+        sectionStyles: [
+          {
+            "opacity": [.1]
+          },
+          {
+            "opacity": [.04]
+          },
+          {
+            "opacity": [.04]
+          },
+          {
+            "opacity": [0]
+          }
+        ]
+      },
+    ]
+
+    function lerpElementStyles() {
+      for (let data of elementStyleLerp) {
+        const element = document.querySelector(data.element);
+        for (let style in data.sectionStyles[currentPage]) {
+          var string = "";
+          for (let i=0; i<data.sectionStyles[currentPage][style].length; i++) {
+            const value = data.sectionStyles[currentPage][style][i];
+            if (isNaN(value)) {
+              string += value;
+              continue;
+            }
+            const next = data.sectionStyles[currentPage+1][style][i];
+            string += lerp(value, next, currentLerpFactor);
+          }
+          element.style[style] = string;
+        }
+      }
+    }
+
+    var cdIntro = {
+      done: false,
+      duration: 100,
+      elapsed: 0,
+      introSectionStyle: {
+        "left": [100, "%"],
+        "translate": [0, "% -50%"],
+      },
+      destinationSectionStyle: {
+        "left": [50, "%"],
+        "translate": [-50, "% -50%"],
+      },
+    };
+    function updateCDIntro() {
+      if (cdIntro.done) {
+        return;
+      }
+
+      cdIntro.elapsed++;
+      for (let style in cdIntro.introSectionStyle) {
+        for (let i=0; i<cdIntro.introSectionStyle[style].length; i++) {
+          const value = cdIntro.introSectionStyle[style][i];
+          if (isNaN(value)) continue;
+          elementStyleLerp[0].sectionStyles[0][style][i] = lerp(cdIntro.introSectionStyle[style][i], cdIntro.destinationSectionStyle[style][i], smoothstep(cdIntro.elapsed/cdIntro.duration));
+        }
+      }
+      if (cdIntro.elapsed == cdIntro.duration) {
+        cdIntro.done = true;
+      }
+    }
+  </script>
+</html>

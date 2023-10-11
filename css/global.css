@@ -1,0 +1,561 @@
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Apple SD Gothic Neo Thin'),
+      url('../res/fonts/applesdgothicneo/100_AppleSDGothicNeo-Thin.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/100_AppleSDGothicNeo-Thin.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Apple SD Gothic Neo UltraLight'),
+      url('../res/fonts/applesdgothicneo/200_AppleSDGothicNeo-UltraLight.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/200_AppleSDGothicNeo-UltraLight.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Apple SD Gothic Neo Light'),
+      url('../res/fonts/applesdgothicneo/300_AppleSDGothicNeo-Light.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/300_AppleSDGothicNeo-Light.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Apple SD Gothic Neo Medium'),
+      url('../res/fonts/applesdgothicneo/400_AppleSDGothicNeo-Medium.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/400_AppleSDGothicNeo-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Apple SD Gothic Neo Regular'),
+      url('../res/fonts/applesdgothicneo/500_AppleSDGothicNeo-Regular.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/500_AppleSDGothicNeo-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Apple SD Gothic Neo SemiBold'),
+      url('../res/fonts/applesdgothicneo/600_AppleSDGothicNeo-SemiBold.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/600_AppleSDGothicNeo-SemiBold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Apple SD Gothic Neo Bold'),
+      url('../res/fonts/applesdgothicneo/700_AppleSDGothicNeo-Bold.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/700_AppleSDGothicNeo-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Apple SD Gothic Neo ExtraBold'),
+      url('../res/fonts/applesdgothicneo/800_AppleSDGothicNeo-ExtraBold.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/800_AppleSDGothicNeo-ExtraBold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Apple SD Gothic Neo Heavy'),
+      url('../res/fonts/applesdgothicneo/900_AppleSDGothicNeo-Heavy.woff2') format('woff2'),
+      url('../res/fonts/applesdgothicneo/900_AppleSDGothicNeo-Heavy.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'LeferiPoint-BlackObliqueA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackObliqueA.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+}
+
+:root {
+  --gray: #efefef;
+  --oblique: 'LeferiPoint-BlackObliqueA', sans-serif;
+  --font-size-tiny: .8rem;
+  --gnb-padding: 3rem;
+}
+
+body, html, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button, table, tr, td, th {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+}
+button svg {
+  stroke: black;
+  line-height: 0;
+}
+
+html {
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+  word-break: keep-all;
+  font-size: 15px;
+}
+
+main {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+p {
+  margin-bottom: 1em;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+body.nav-dropdown {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.text-justify {
+  text-align: justify;
+  word-break: break-word;
+}
+
+.gone {
+  display: none !important;
+}
+.text-align-right {
+  text-align: right;
+}
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+.flexbox {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.flexbox.column {
+  flex-direction: column;
+}
+.flexbox.wrap {
+  flex-wrap: wrap;
+}
+.flexbox .grow {
+  flex-grow: 1;
+}
+
+.grid {
+  display: grid;
+}
+.grid.g2 {
+  grid-template-columns: 50% 50%;
+}
+.grid.g3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.grid.g4 {
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* global elements */
+
+.main-bg-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  opacity: .04;
+  pointer-events: none;
+  font-size: 11rem;
+  font-weight: 900;
+  color: black;
+  z-index: -1;
+}
+.main-bg-title-1, .main-bg-title-2 {
+  position: absolute;
+  white-space: nowrap;
+}
+.main-bg-title-1 {
+  left: 0;
+  top: 0;
+  rotate: -90deg;
+  translate: calc(-1ch - .13em) 50%;
+}
+.main-bg-title-2 {
+  bottom: -0.27em;
+  right: -.035em;
+}
+
+.icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  object-fit: scale-down;
+}
+
+body.nav-dropdown main > *,
+body.nav-dropdown footer {
+  display: none;
+}
+.gnb.nav-dropdown {
+  display: block;
+  height: 100dvh;
+}
+
+.gnb-mobile-burger {
+  height: 100%;
+  display: none;
+}
+.gnb {
+  position: relative;
+  height: fit-content;
+
+  padding: var(--gnb-padding);
+  width: 100%;
+  top: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  transition: background-color .2s;
+}
+.gnb.nav-dropdown {
+  background-color: white;
+}
+.gnb-navstuff {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  row-gap: 1rem;
+  position: relative;
+}
+.gnb * {
+  pointer-events: auto;
+}
+.gnb-title, .gf-title, .scrolling-bar {
+  white-space: pre;
+  font-size: var(--font-size-tiny);
+  font-weight: bold;
+}
+.gnb-spacing {
+  content: "";
+  display: block;
+  flex-grow: 1;
+  flex-basis: 1rem;
+}
+.gnb-navbar {
+  font-size: .94rem;
+  color: lightgray;
+  display: flex;
+  width: 100%;
+  max-width: 50rem;
+  justify-content: space-between;
+  flex-basis: min-content;
+  flex-grow: 2;
+  gap: 1rem;
+}
+.gnb-page-link {
+  color: black;
+  opacity: .1;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.gnb-page-link:hover {
+  opacity: 1;
+}
+.gnb-page-link.current-page {
+  opacity: 1;
+  pointer-events: none;
+}
+.gnb-burger {
+  background-image: url("data:image/svg+xml,%3Csvg width='25' height='18' viewBox='0 0 25 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23 0H2C0.89543 0 0 0.89543 0 2C0 3.10457 0.89543 4 2 4H23C24.1046 4 25 3.10457 25 2C25 0.89543 24.1046 0 23 0Z' fill='black'/%3E%3Cpath d='M23 0.5H2C1.17157 0.5 0.5 1.17157 0.5 2C0.5 2.82843 1.17157 3.5 2 3.5H23C23.8284 3.5 24.5 2.82843 24.5 2C24.5 1.17157 23.8284 0.5 23 0.5Z' stroke='%23707070'/%3E%3Cpath d='M23 7H2C0.89543 7 0 7.89543 0 9C0 10.1046 0.89543 11 2 11H23C24.1046 11 25 10.1046 25 9C25 7.89543 24.1046 7 23 7Z' fill='black'/%3E%3Cpath d='M23 7.5H2C1.17157 7.5 0.5 8.17157 0.5 9C0.5 9.82843 1.17157 10.5 2 10.5H23C23.8284 10.5 24.5 9.82843 24.5 9C24.5 8.17157 23.8284 7.5 23 7.5Z' stroke='%23707070'/%3E%3Cpath d='M23 14H2C0.89543 14 0 14.8954 0 16C0 17.1046 0.89543 18 2 18H23C24.1046 18 25 17.1046 25 16C25 14.8954 24.1046 14 23 14Z' fill='black'/%3E%3Cpath d='M23 14.5H2C1.17157 14.5 0.5 15.1716 0.5 16C0.5 16.8284 1.17157 17.5 2 17.5H23C23.8284 17.5 24.5 16.8284 24.5 16C24.5 15.1716 23.8284 14.5 23 14.5Z' stroke='%23707070'/%3E%3C/svg%3E");
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+}
+.gnb-dropdown {
+  margin-top: 2rem;
+  border: 1px solid rgba(0,0,0,.1);
+  width: 100%;
+  height: calc(100dvh - 12rem);
+  background: conic-gradient(from 90deg at 1px 1px, #0000 90deg, rgba(0,0,0,.1) 0) 0 0/3rem 3rem;
+  background-position: 50% 50%;
+  /* animation: gnb-reveal .3s; */
+  padding: 1rem;
+  box-sizing: border-box;
+  position: relative;
+
+  counter-reset: dropdown-buttons 0;
+  display: flex;
+  flex-direction: column;
+}
+.gnb-dropdown-table {
+  margin: auto;
+  width: 80%;
+}
+.gnb-dropdown-table td {
+  padding: 0;
+  padding-bottom: 3rem;
+  white-space: nowrap;
+}
+.gnb-dropdown-table a {
+  counter-increment: dropdown-buttons 1;
+  opacity: 1;
+  white-space: nowrap;
+  transition: opacity .3s;
+}
+
+.gnb-h1 {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 3.3rem;
+  font-family: var(--oblique);
+}
+.gnb-dropdown-table a:before {
+  content: "0" counter(dropdown-buttons);
+  font-style: normal;
+  font-size: .8em;
+  vertical-align: text-top;
+  margin-right: 1em;
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 900;
+}
+.gnb-dropdown-table.hover-child a {
+  opacity: .1;
+}
+.gnb-dropdown-table.hover-child a:hover {
+  opacity: 1;
+}
+.gnb-dropdown-links {
+  /* width: 100%; */
+  display: flex;
+  gap: 10vw;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
+.gnb-dropdown-links a {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+main {
+  width: 100%;
+  flex-grow: 1;
+}
+
+.global-footer {
+  flex-shrink: 0;
+  width: 100vw;
+  /* margin-top: auto; */
+  font-size: 1rem;
+}
+.gf-logo-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5em;
+  margin-top: 2.5em;
+  gap: 1.5em;
+  align-items: center;
+}
+.gf-logo-bar img {
+  max-height: 1.75em;
+}
+.gf-title {
+  font-size: .85em;
+}
+.gf-title div:last-child {
+  line-height: 1em;
+  font-size: .6em;
+}
+
+.scrolling-bar {
+  background: url("../res/footer.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  justify-content: flex-end;
+  font-size: 1rem;
+  color: white;
+}
+.scrolling-bar * {
+  padding-left: 1em;
+  animation: text-loop linear infinite 20s;
+  margin: 0;
+  margin-top: .75em;
+  margin-bottom: .75em;
+}
+@keyframes text-loop {
+  0% {
+    translate: 0 0 0;
+  }
+  100% {
+    translate: 100% 0 0;
+  }
+}
+.scrolling-bar.backwards * {
+  animation: text-loop2 linear infinite 7s;
+}
+@keyframes text-loop2 {
+  0% {
+    translate: 100% 0 0;
+  }
+  100% {
+    translate: 0 0 0;
+  }
+}
+
+.main-cd {
+  max-width: 60vw;
+  max-height: 60dvh;
+  aspect-ratio: 1;
+}
+.rotate-forever {
+  animation: rotate-forever linear 3.5s infinite;
+}
+@keyframes rotate-forever {
+  0% { rotate: 0deg }
+  100% { rotate: 360deg }
+}
+
+table, tr, th, td {
+  font-weight: normal;
+  font-size: var(--font-size-tiny);
+}
+th, td {
+  vertical-align: top;
+}
+th {
+  white-space: nowrap;
+  text-align: right;
+}
+th:nth-child(3n) {
+  padding-left: 10em;
+}
+
+.img-dialog {
+  border: none;
+  background: transparent;
+  overflow: hidden;
+  text-align: center;
+}
+.img-dialog:focus {
+  outline: none;
+}
+.img-dialog img {
+  max-width: 90vw;
+  max-height: 70dvh;
+  margin: auto;
+}
+.img-dialog::backdrop {
+  background: rgba(0,0,0,.8);
+}
+
+
+/* smartphones, iPhone, portrait 480x320 phones */
+@media only screen and (max-width:480px)  {
+  :root {
+    --gnb-padding: 1rem;
+  }
+  html {
+    font-size: 17px;
+  }
+
+  .gnb-dropdown {
+    height: calc(100dvh - 6rem);
+  }
+
+  .gnb-navstuff {
+    flex-wrap: nowrap;
+    gap: 1rem;
+    justify-content: start;
+  }
+  .gnb-navstuff .gnb-spacing,
+  .gnb-navstuff .gnb-navbar {
+    display: none;
+  }
+  .gnb-title {
+    font-size: .6rem;
+  }
+
+  .gnb-navstuff {
+    justify-content: space-between;
+  }
+
+  .gnb-mobile-burger {
+    display: block;
+  }
+
+  .main-bg-title {
+    font-size: 8rem;
+  }
+
+  .global-footer {
+    font-size: .5rem;
+  }
+
+  .img-dialog {
+    padding: 0;
+  }
+  .img-dialog img {
+    max-width: 100%;
+    max-height: 100dvh;
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:700px) {
+  .gnb-dropdown-links {
+    gap: .5rem 2rem;
+  }
+  .gnb-dropdown-table td {
+    padding-bottom: 5.5dvh;
+  }
+  .gnb-dropdown-table a {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media only screen and (max-width:750px) {
+  .gnb-dropdown-table tr {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width:1200px) {
+  .gnb-dropdown-table a {
+    font-size: max(2rem, 4vw);
+  }
+}

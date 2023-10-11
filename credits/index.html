@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="utf-8">
+    <title>가치의 재생 | Credits</title>
+    <link rel="icon" type="image/x-icon" href="../res/favicon.png">
+    <link rel="stylesheet" href="../css/global.css">
+    <style media="screen">
+      main {
+        overflow-x: hidden;
+      }
+
+      .main-cd {
+        position: absolute;
+        top: 0;
+        right: 0;
+        translate: 50% 0;
+        z-index: -1;
+      }
+
+      .container {
+        position: relative;
+        padding: 20vw;
+        padding-top: 13rem;
+        padding-bottom: 0;
+        gap: 10rem;
+        font-weight: bold;
+        overflow-x: hidden;
+      }
+
+      h1 {
+        font-style: italic;
+        font-weight: bold;
+        font-family: var(--oblique);
+        line-height: 1em;
+        margin-bottom: 1em;
+      }
+
+      .big {
+        font-size: 1.3em;
+        font-weight: 900;
+      }
+
+      .left, .right {
+        width: 50%;
+      }
+      .left {
+        justify-content: start;
+      }
+      .right {
+        align-self: end;
+      }
+
+      .profs {
+        font-weight: bold;
+        padding: calc(var(--gnb-padding) + 2rem);
+        margin-top: 10rem;
+        gap: 5rem;
+      }
+      .profs > .flexbox {
+        width: fit-content;
+      }
+      .profs > .flexbox > .flexbox {
+        justify-content: start;
+        gap: 0;
+        white-space: pre;
+        align-items: baseline;
+      }
+      .prof-address {
+        width: 75%;
+        box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, .16);
+        flex-grow: 1;
+        position: relative;
+        padding: 1.5rem;
+      }
+      .prof-address .flexbox {
+        align-items: baseline;
+        position: absolute;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        font-size: .8rem;
+        gap: .25em;
+      }
+      .prof-address p {
+        font-weight: normal;
+      }
+      .prof-address h1 {
+        font-size: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      .wrap {
+        flex-wrap: wrap;
+        justify-content: start;
+      }
+      .wrap * {
+        width: 2.5em;
+        text-align: center;
+        margin-right: 2rem;
+      }
+
+      .general-box {
+        width: 70%;
+      }
+    </style>
+    <style media="screen">
+      @media (max-width:480px) {
+        .main-cd {
+          max-width: 100vw;
+        }
+
+        .general-box.left {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .profs {
+          flex-direction: column;
+        }
+        .profs .flexbox {
+          margin: auto;
+        }
+        .prof-address {
+          width: unset;
+          padding-bottom: 4.5rem;
+        }
+        .profs {
+          padding: var(--gnb-padding);
+        }
+      }
+
+      @media (max-width: 850px) {
+        .left, .right {
+          flex-direction: column;
+          width: 80%;
+        }
+        .left h1, .right h1 {
+          margin-bottom: 0;
+        }
+        .container a {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .left .flexbox, .right .flexbox {
+          justify-content: flex-start;
+          gap: 1rem 2rem;
+        }
+        .right {
+          width: fit-content;
+        }
+
+        footer {
+          margin-top: 15vh;
+        }
+      }
+
+      @media (max-width: 1000px) {
+        .container {
+          padding-left: var(--gnb-padding);
+          padding-right: var(--gnb-padding);
+          gap: 7rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="main-bg-title">
+      <div class="main-bg-title-1">가치의</div>
+      <div class="main-bg-title-2">재生</div>
+    </div>
+
+    <main>
+      <header></header>
+
+      <div class="container flexbox column">
+        <div class="main-cd"></div>
+
+        <div class="left flexbox general-box">
+          <h1>GENERAL.</h1>
+          <div class="flexbox column">
+            <div class="">
+              <a><span class="big">조민서</span> | Jo Min Seo</a>
+            </div>
+            <div class="text-justify" style="font-weight: normal;">
+              미숙한 학회장을 따라서 이 큰 전시를 따라와주셔서 너무 미안하고 감사합니다. 여러분들과 함께 가치의 재생을 시작하고 마무리할 수 있어서 너무 행복했습니다. 매년 더 멋진 작품으로 좋은 뜻을 이어서 뉴미디어콘텐츠과 더 잘나가는 과가 되면 좋겠습니다. 파이팅!
+            </div>
+          </div>
+        </div>
+
+        <div class="left flexbox column">
+          <h1>Planning Team</h1>
+          <div class="flexbox">
+            <div class="flexbox column">
+              <div><a><span class="big">정재연</span> | Jeong Jae Yeon</a></div>
+              <div><a><span class="big">이정동</span> | Lee Jeong Dong</a></div>
+              <div><a><span class="big">임지윤</span> | Lim Jiyun</a></div>
+            </div>
+            <div class="flexbox column">
+              <div><a><span class="big">송신영</span> | Song Sinyeong</a></div>
+              <div><a><span class="big">손지혜</span> | Son Jihye</a></div>
+              <div><a><span class="big">진규원</span> | Chin Quewon</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right flexbox column">
+          <h1>Promotion Team</h1>
+          <div class="flexbox">
+            <div class="flexbox column">
+              <div><a><span class="big">이채영</span> | Lee Chae Young</a></div>
+              <div><a><span class="big">양다온</span> | Yang Daon</a></div>
+              <div><a><span class="big">이정우</span> | Lee Jungwoo</a></div>
+            </div>
+            <div class="flexbox column">
+              <div><a><span class="big">김미르</span> | Kim Mir</a></div>
+              <div><a><span class="big">김지혜</span> | Kim Ji Hye</a></div>
+              <div><a><span class="big">인시영</span> | In Si Yeong</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="left flexbox column">
+          <h1>Operation Team</h1>
+          <div class="flexbox">
+            <div class="flexbox column">
+              <div><a><span class="big">김주연</span> | Kim Ju Yeon</a></div>
+              <div><a><span class="big">구창승</span> | Koo Chang Seung</a></div>
+              <div><a><span class="big">김진규</span> | Kim Jin Gyu</a></div>
+            </div>
+            <div class="flexbox column">
+              <div><a><span class="big">윤나연</span> | Yoon Nayeon</a></div>
+              <div><a><span class="big">이수호</span> | Lee Suho</a></div>
+              <div><a><span class="big">정혜수</span> | Jeong Hye Soo</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right flexbox column">
+          <h1>Video Team</h1>
+          <div class="flexbox">
+            <div class="flexbox column">
+              <div><a><span class="big">김규리</span> | Kim Gyu Ri</a></div>
+              <div><a><span class="big">음현수</span> | Eum Hyeonsu</a></div>
+            </div>
+            <div class="flexbox column">
+              <div><a><span class="big">김주연</span> | Kim Ju Yeon</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flexbox column">
+          <h1>STAFF</h1>
+          <div class="flexbox big wrap">
+            <div>구유정</div>
+            <div>권서윤</div>
+            <div>김나은</div>
+            <div>남규식</div>
+            <div>박가온</div>
+            <div>유재율</div>
+            <div>이도형</div>
+            <div>정인철</div>
+            <div>김동언</div>
+            <div>김솔</div>
+            <div>김승현</div>
+            <div>김아연</div>
+            <div>김재은</div>
+            <div>박민유</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profs flexbox">
+        <div class="flexbox column">
+          <h1>Thanks To</h1>
+          <div class="flexbox">
+            <div><span class="big">책임지도</span> | </div>
+            <div>배윤경 교수님</div>
+          </div>
+          <div class="flexbox">
+            <div><span class="big">전담지도</span> | </div>
+            <div class="flexbox column">
+              <div>이광수 교수님</div>
+              <div>이석희 교수님</div>
+              <div>이주헌 교수님</div>
+            </div>
+          </div>
+          <div class="flexbox">
+            <div><span class="big">강의지도</span> | </div>
+            <div class="flexbox column">
+              <div>김기춘 교수님</div>
+              <div>이현경 교수님</div>
+              <div>최병하 교수님</div>
+              <div>조혜정 교수님</div>
+            </div>
+          </div>
+          <div class="flexbox">
+            <div><span class="big">특별지도</span> | </div>
+            <div>문정수 대표님</div>
+          </div>
+        </div>
+        <div class="prof-address">
+          <h1>CONGRATULATORY ADDRESS</h1>
+          <p class="text-justify">안녕하세요, 교수님. 여기를 어떤 내용으로 채우실 건가요?</p>
+          <div class="flexbox">
+            <div><span class="big">책임지도</span> | </div>
+            <div>배윤경 교수님</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <footer></footer>
+
+  </body>
+  <script defer type="text/javascript" src="../js/dom/global.js"></script>
+  <script defer type="text/javascript" src="../js/database.js"></script>
+  <script type="text/javascript">
+    const NAV_ID = "Credits";
+
+    window.onload = function() {
+      createCD(document.querySelector(".main-cd"));
+      createGNB(document.querySelector("header"));
+      createFooter(document.querySelector("footer"));
+
+      loadDatabase("artists", function() {
+        let bigs = document.getElementsByClassName("big");
+        for (let big of bigs) {
+          if (DATABASE.artists[big.textContent]) {
+            big.parentElement.href = "../portfolio/#"+DATABASE.artists[big.textContent]["이름(영문)"].toLowerCase().replaceAll(" ","-");
+          }
+        }
+      });
+    }
+  </script>
+</html>

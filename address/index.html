@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="utf-8">
+    <title>가치의 재생 | 오시는 길</title>
+    <link rel="icon" type="image/x-icon" href="../res/favicon.png">
+    <link rel="stylesheet" href="../css/global.css">
+    <style media="screen">
+      main {
+        height: 100dvh;
+      }
+
+      .container {
+        padding: var(--gnb-padding);
+        padding-top: 0;
+        box-sizing: border-box;
+        height: 100%;
+        gap: 1.5rem;
+      }
+      main .flexbox {
+        justify-content: flex-start;
+        gap: var(--gnb-padding);
+      }
+
+      h1 {
+        font-size: 1rem;
+      }
+
+      #map {
+        height: 100%;
+      }
+      #map iframe {
+        width: 100%;
+        height: 100%;
+      }
+
+      th {
+        text-align: left;
+      }
+      th, td {
+        padding: 1em;
+        padding-top: 0;
+      }
+
+      main .icon-box {
+        justify-content: space-between;
+        gap: .5rem;
+      }
+    </style>
+    <style media="screen">
+      @media (max-width: 500px) {
+        .container > .flexbox {
+          flex-direction: column;
+        }
+
+        td {
+          padding: .5em;
+          padding-top: 0;
+        }
+        th {
+          padding: 0;
+        }
+        main .icon-box {
+          justify-content: flex-start;
+          gap: 1em;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .container > .flexbox {
+          gap: .5em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="main-bg-title">
+      <div class="main-bg-title-1">가치의</div>
+      <div class="main-bg-title-2">재生</div>
+    </div>
+
+    <main>
+
+      <header></header>
+      <div class="container flexbox column">
+        <h1>Address</h1>
+        <div id="map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2044.2455972038629!2d127.03623973795855!3d37.26129961953169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b435ee1a2d0fb%3A0xf6514d662bd5d2c!2sGyeonggi%20Arts%20Center!5e0!3m2!1sen!2skr!4v1695322905772!5m2!1skr!2skr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="flexbox">
+          <h1>경기아트센터 B1 갤러리</h1>
+          <div>경기도 수원시 팔달구 효원로 307번길 20</div>
+          <table>
+            <tr>
+              <th>Call</th>
+              <td>+82 031-230-3200</td>
+            </tr>
+            <tr>
+              <th>Operation</th>
+              <td>MON - SAT  10AM - 7PM</td>
+            </tr>
+            <tr>
+              <th>Follow</th>
+              <td class="flexbox icon-box">
+                <a target="_blank" href="http://www.ggac.or.kr/"><img class="icon" src="../res/icons/web.png"></a>
+                <a target="_blank" href="https://www.instagram.com/ggac_official/"><img class="icon" src="../res/icons/instagram.png"></a>
+                <a target="_blank" href="https://www.youtube.com/channel/UC0p33ZnRkC4p0jiPJajQZkw"><img class="icon" src="../res/icons/youtube.png"></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </main>
+
+    <footer></footer>
+
+  </body>
+  <script defer type="text/javascript" src="../js/dom/global.js"></script>
+  <!-- <script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly"></script> -->
+  <script type="text/javascript">
+    const NAV_ID = "Address";
+
+    // function initMap() {
+    //   var map = new google.maps.Map(document.getElementById("map"), {
+    //     center: { lat: -34.397, lng: 150.644 },
+    //     zoom: 8
+    //   });
+    // }
+
+    window.onload = function() {
+      createGNB(document.querySelector("header"));
+      createFooter(document.querySelector("footer"));
+    }
+  </script>
+</html>

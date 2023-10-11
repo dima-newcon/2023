@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="utf-8" content="user-scalable=0">
+    <title>가치의 재생 | Music</title>
+    <link rel="icon" type="image/x-icon" href="../res/favicon.png">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/player.css">
+    <style media="screen">
+      body.nav-dropdown .cd,
+      body.nav-dropdown #toggle-tray-button,
+      body.nav-dropdown .tray {
+        display: none;
+      }
+
+      .playlist-controls {
+        width: 100%;
+        padding: var(--gnb-padding);
+        padding-top: max(1rem, calc(var(--gnb-padding) / 2));
+        padding-bottom: max(1rem, calc(var(--gnb-padding) / 2));
+        gap: 2rem;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px solid #DDDDDD;
+      }
+      .playlist-controls #playlist-button {
+        position: absolute;
+        left: var(--gnb-padding);
+      }
+      .playlist-controls button {
+        width: 1rem;
+        height: 1rem;
+        position: relative;
+      }
+      .playlist-controls button img {
+        width: inherit;
+        height: inherit;
+        position: absolute;
+        transition: opacity .2s;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+      }
+      .playlist-controls button.big {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      .play-button img:last-child,
+      .play-button.paused img:first-child,
+      #playlist-button img:first-child,
+      body.playlist-open #playlist-button img:last-child {
+        opacity: 1;
+      }
+      .play-button img:first-child,
+      .play-button.paused img:last-child,
+      body.playlist-open #playlist-button img:first-child,
+      #playlist-button img:last-child {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      body.playlist-open .hide-on-playlist-open,
+      body.playlist-open .cd {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #playlist {
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0;
+        padding: 3rem;
+        padding-top: 0;
+        padding-bottom: 2rem;
+        box-sizing: border-box;
+        z-index: 4;
+        flex-grow: 1;
+      }
+      body.playlist-open #playlist {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      #playlist > .flexbox {
+        width: 100%;
+        height: 100%;
+        background: white;
+        box-shadow: 4px 4px 10px 0 rgba(0,0,0,.15);
+        gap: 0;
+      }
+      #playlist > .flexbox > * {
+        padding: 3rem;
+
+        box-sizing: border-box;
+        border-right: 1px solid black;
+        width: 50%;
+      }
+      #playlist > .flexbox > div:last-child {
+        border: none;
+      }
+      #playlist > .flexbox > div {
+        position: relative;
+      }
+
+      h1, li {
+        font-size: 1.5rem;
+        font-weight: 900;
+      }
+      h2 {
+        font-size: 1.2rem;
+        font-weight: normal;
+        margin-bottom: 3rem;
+      }
+      li {
+        margin: 0;
+        list-style: none;
+        color: #DDDDDD;
+        white-space: pre;
+      }
+      li.selected {
+        color: black;
+      }
+      #playlist > .flexbox > ol {
+        counter-reset: teams;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: space-between;
+        width: fit-content;
+      }
+      li::before {
+        counter-increment: teams;
+        content: "0" counter(teams);
+        display: inline-block;
+        text-align: right;
+        width: 2ch;
+        margin-right: 2rem;
+      }
+
+      .info-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        width: calc(100% - 6rem);
+        /* height: 70%; */
+        padding: 2rem;
+        padding-bottom: 5.5rem;
+        border: 1px solid black;
+        border-radius: 2rem;
+        text-align: center;
+        justify-content: start;
+        box-sizing: border-box;
+      }
+      .info-card .playlist-controls {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      #team-cd {
+        aspect-ratio: 1;
+        width: calc(100% - 4rem);
+        margin: auto;
+        align-self: center;
+        border-radius: 50%;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, .1));
+      }
+
+      #team-cd-container {
+        aspect-ratio: 1;
+      }
+
+      a {
+        cursor: pointer;
+        color: inherit;
+      }
+    </style>
+    <style media="screen">
+      @media (max-width:480px) {
+        #toggle-tray-button {
+          rotate: 90deg;
+          top: 3rem;
+          left: 50%;
+          translate: -50% 0;
+          transition: top 1s, translate 1s;
+        }
+        #toggle-tray-button.open {
+          top: calc(50% - 4rem);
+          translate: -50% -50%;
+        }
+
+        .tray {
+          width: unset;
+          height: 37.5dvh;
+          flex-direction: column-reverse;
+          top: 0;
+          left: 50%;
+          translate: -50% -100%;
+          padding: 0;
+          align-items: center;
+          gap: 5vw;
+          overflow-x: visible;
+        }
+        .tray.open {
+          translate: -50% 0;
+        }
+
+        #playlist > .flexbox > * {
+          padding: 1rem;
+        }
+        #playlist {
+          padding: 1rem;
+          padding-top: 0;
+          height: calc(100% - 9rem);
+          /* padding-bottom: 2rem; */
+        }
+        .info-card {
+          width: 100%;
+        }
+
+        #playlist li {
+          font-size: 1rem;
+        }
+        #playlist h1 {
+          font-size: 1rem;
+        }
+        #playlist h2 {
+          font-size: .9rem;
+          margin-bottom: 1rem;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .tray {
+          width: 30vw;
+        }
+      }
+
+      @media (max-width: 1300px) {
+        #team-cd {
+          width: 100%;
+        }
+        #team-cd-container {
+          aspect-ratio: unset;
+          flex-shrink: 1;
+        }
+        #playlist > .flexbox > * {
+          padding: 1.5rem;
+        }
+      }
+
+      @media (orientation: portrait) {
+        #playlist {
+          overflow: hidden;
+        }
+        #playlist > .flexbox > ol {
+          flex-direction: row;
+          overflow-x: scroll;
+          gap: 2.5rem;
+          flex-shrink: 0;
+          width: 100%;
+        }
+        ol {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        ol::-webkit-scrollbar {
+          display: none;
+        }
+        #playlist h2 {
+          margin-bottom: 0;
+        }
+        li::before {
+          margin-right: 1rem;
+        }
+        #playlist > .flexbox {
+          flex-direction: column;
+          overflow: hidden;
+        }
+        #playlist > .flexbox > *, ol {
+          border: none;
+          border-bottom: 1px solid black;
+          width: 100%;
+        }
+        #playlist > .flexbox > .flexbox {
+          aspect-ratio: unset !important;
+        }
+        #team-cd {
+          width: 50%;
+        }
+
+        .info-card {
+          position: relative;
+          translate: none;
+          margin: auto;
+          top: 0;
+          left: 0;
+        }
+
+        #toggle-tray-button {
+          width: 3vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <canvas></canvas>
+
+    <header></header>
+
+    <div class="tray hide-on-playlist-open">
+    </div>
+    <button id="toggle-tray-button" class="gone hide-on-playlist-open" onclick="toggleTray()">
+      <img draggable="false" src="../res/icons/open-tray.svg" alt="">
+    </button>
+
+    <div id="playlist">
+      <div class="flexbox">
+        <ol>
+        </ol>
+        <div class="grow">
+          <div class="flexbox column info-card">
+            <h1 id="music-title">Title</h1>
+            <h2 id="music-artist">Artist</h2>
+            <p id="music-desc" class="text-justify">노래를 선정한 이유</p>
+            <div class="flexbox playlist-controls">
+              <button onclick="prevTrack()">
+                <img src="../res/icons/prevtrack.svg" alt="이전 CD">
+              </button>
+              <button onclick="toggleTrack()" class="play-button big paused">
+                <img src="../res/icons/play.svg" alt="재생">
+                <img src="../res/icons/pause.svg" alt="일시정지">
+              </button>
+              <button onclick="nextTrack()">
+                <img src="../res/icons/nexttrack.svg" alt="다음 CD">
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="flexbox team-cd-container">
+          <img id="team-cd" src="../res/teams/3초'/cd.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="playlist-controls">
+      <button id="playlist-button" class="big" alt="플레이리스트" onclick="body.classList.toggle('playlist-open')">
+        <img src="../res/icons/playlist.svg">
+        <img src="../res/icons/playlist-open.svg">
+      </button>
+      <button onclick="prevTrack()" class="hide-on-playlist-open">
+        <img src="../res/icons/prevtrack.svg" alt="이전 CD">
+      </button>
+      <button onclick="toggleTrack()" class="play-button big paused hide-on-playlist-open">
+        <img src="../res/icons/play.svg" alt="재생">
+        <img src="../res/icons/pause.svg" alt="일시정지">
+      </button>
+      <button onclick="nextTrack()" class="hide-on-playlist-open">
+        <img src="../res/icons/nexttrack.svg" alt="다음 CD">
+      </button>
+    </div>
+
+  </body>
+
+  <script defer type="text/javascript" src="../js/toolbox.js"></script>
+  <script defer type="text/javascript" src="../js/database.js"></script>
+  <script defer type="text/javascript" src="../js/dom/global.js"></script>
+  <script defer type="text/javascript" src="../js/dom/play.js"></script>
+  <script defer type="text/javascript">
+    const NAV_ID = "Play";
+
+    window.onload = function() {
+      createGNB(document.querySelector("header"));
+      loadDatabase("teams", function() {
+        let i=0;
+        for (let team in DATABASE.teams) {
+          let cd = new DraggableCD(team);
+
+          let y = window.innerHeight/2 + (i%4-1.5) * window.innerHeight/6;
+          if (i<4) {
+            x = cd.radius + 50;
+            if (i%2==1) x += cd.radius * 2;
+          } else {
+            x = window.innerWidth-cd.radius - 50;
+            if (i%2==1) x -= cd.radius * 2;
+          }
+          cd.setPosition(x, y);
+
+          i++;
+        }
+        window.onresize();
+
+        draggableCDs[0].select();
+
+        lastTick = new Date();
+        tick();
+      });
+    }
+  </script>
+</html>

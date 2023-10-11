@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="utf-8">
+    <title>가치의 재생 | Guest Book</title>
+    <link rel="icon" type="image/x-icon" href="../res/favicon.png">
+    <link rel="stylesheet" href="../css/global.css">
+    <style media="screen">
+      .container {
+        position: relative;
+        padding: var(--gnb-padding);
+        padding-top: 0;
+      }
+
+      .container > input {
+        width: 50%;
+      }
+      input, .container button {
+        border: 1px solid black;
+        padding: .8rem;
+        box-shadow: 4px 4px 10px 0 rgba(0,0,0,.16);
+        font-size: 20px;
+        font-family: inherit;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        background: white;
+        box-sizing: border-box;
+        border-radius: 0;
+      }
+      .container button {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+      #message-input-wrapper, #message-input-wrapper input {
+        width: 100%;
+      }
+      #message-input-wrapper input {
+        height: 100%;
+      }
+      input::placeholder {
+        color: #CCCCCC;
+        opacity: 1;
+      }
+
+      #note-container {
+        margin-top: 6rem;
+        gap: var(--gnb-padding);
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        position: relative;
+        width: 100%;
+      }
+      .main-cd {
+        position: absolute;
+        left: 0;
+        top: 10rem;
+        translate: calc(-50% - 3rem) 0;
+        z-index: -1;
+        flex-basis: 0;
+        min-width: 25rem;
+        aspect-ratio: 1;
+      }
+      .rotate-forever {
+        animation: rotate-forever linear 15s infinite;
+      }
+
+      .note {
+        border: 1px solid black;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 20rem;
+        max-width: calc(33% - 6rem/3);
+        width: 100%;
+        background: white;
+        box-sizing: border-box;
+      }
+      .note .content {
+        padding: 2.5rem;
+        box-sizing: border-box;
+        text-align: justify;
+        word-break: break-word;
+      }
+      .note .nametag {
+        text-align: center;
+        padding: .75rem;
+        box-sizing: border-box;
+        border-top: 1px solid black;
+      }
+      .nametag::before {
+        content: "From. ";
+      }
+
+      dialog {
+        border: 1px solid black;
+        text-align: center;
+      }
+
+      #message-input-wrapper {
+        position: relative;
+      }
+      #message-input-wrapper::after {
+        content: "* 최대 200자까지 작성 가능합니다.";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        translate: 0 calc(100% + 1rem);
+        color: #CCCCCC;
+      }
+    </style>
+    <style media="screen">
+      @media (max-width: 480px) {
+        #message-input-wrapper::after {
+          font-size: .8rem;
+          width: 50%;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .inputs {
+          flex-direction: column;
+        }
+        .inputs input {
+          width: unset;
+        }
+        .inputs button {
+          align-self: end;
+        }
+        .note {
+          min-width: 0;
+          max-width: unset;
+        }
+        #note-container {
+          margin-top: 3rem;
+        }
+
+        .main-cd {
+          top: 15rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <main>
+      <header></header>
+
+      <div class="container flexbox column">
+        <div class="inputs flexbox">
+          <input maxlength="25" oninput="this.scrollLeft = this.scrollWidth" autocomplete="off" type="text" name="name" placeholder="| NAME">
+          <div id="message-input-wrapper" class="grow">
+            <input maxlength="200" oninput="this.scrollLeft = this.scrollWidth" autocomplete="off" type="text" name="text" placeholder="| Leave a message">
+          </div>
+          <button onclick="write_data()">
+            <svg width="70" height="30" alt="돌아가기">
+              <line x1="70" y1="15" x2="0" y2="15" />
+              <line x1="70" y1="15" x2="55" y2="0" />
+              <line x1="70" y1="15" x2="55" y2="30" />
+            </svg>
+          </button>
+        </div>
+
+        <div id="cd"></div>
+        <div id="note-container" class="flexbox wrap">
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+
+    <dialog>쪽지 쓰는 중...</dialog>
+
+  </body>
+  <script defer type="text/javascript" src="../js/dom/global.js"></script>
+  <script defer type="text/javascript">
+    const NAV_ID = "Guest Book";
+
+    window.onload = function() {
+      createGNB(document.querySelector("header"));
+      createFooter(document.querySelector("footer"));
+      createCD(document.getElementById("cd"));
+
+      refreshNotes();
+    }
+
+    const SHEET_ID = '1dPq1y9cQqf-2d6J56u93y1FHTi5LRtVZ1gpvJcrmzSk';
+    const API_KEY = "AIzaSyCF5muJe5QsZnMSwjmFzofH5b3Ay-GgccY";
+
+    const dialog = document.querySelector("dialog");
+    const noteContainer = document.getElementById("note-container");
+    function refreshNotes() {
+      while (noteContainer.lastElementChild) {
+        noteContainer.lastElementChild.remove();
+      }
+
+      fetch("https://sheets.googleapis.com/v4/spreadsheets/"+SHEET_ID+"/values/messages/?key="+API_KEY)
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.values) return;
+
+        for (let i=1; i<data.values.length; i++) {
+          const messageTimestamp = data.values[i][0];
+          const messageName = data.values[i][1];
+          const messageContent = data.values[i][2];
+
+          createNote(messageName, messageContent);
+        }
+      });
+    }
+
+    function createNote(name, content) {
+      const note = document.createElement("div");
+      note.className = "note";
+
+      const contentElement = document.createElement("div");
+      contentElement.className = "content";
+      contentElement.textContent = content;
+
+      const nametagElement = document.createElement("div");
+      nametagElement.className = "nametag";
+
+      if (name == "") name = "익명";
+
+      nametagElement.textContent = name;
+
+      note.appendChild(contentElement);
+      note.appendChild(nametagElement);
+      noteContainer.appendChild(note);
+    }
+
+    function write_data() {
+      const content = document.querySelector("[name='text']").value.trim();
+      const name = document.querySelector("[name='name']").value.trim();
+
+      if (content == "") {
+        alert("메시지 내용을 써주세요!");
+        return;
+      }
+      if (name == "") {
+        alert("이름을 써주세요!");
+        return;
+      }
+
+      const data = new FormData();
+      data.set("timestamp", new Date().getTime());
+      data.set("name", name);
+      data.set("text", content);
+
+      dialog.showModal();
+
+      fetch("https://script.google.com/macros/s/AKfycbwxBK8Efgzq7O4EIgHqke_bdhV8P-X3huyZiZGHpwrwo1sU_rp1QY0QaAvgw1d2te9x/exec", {
+        method: "POST",
+        body: data
+      })
+      .then(function(e) {
+        document.querySelector("[name='name']").value = "";
+        document.querySelector("[name='text']").value = "";
+        refreshNotes();
+        dialog.close();
+      })
+      .catch(function(e) {
+        console.log("** error **\n"+e);
+      });
+    }
+  </script>
+</html>
