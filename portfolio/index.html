@@ -389,6 +389,10 @@
         instagram.href = "https://www.instagram.com/"+data["인스타"].replace("@","");
         instagram.textContent = data["인스타"];
         document.getElementById("instagram").appendChild(instagram);
+
+        if (artist == "김주연") {
+          instagram.style.textTransform = "lowercase";
+        }
       } else {
         document.getElementById("instagram").parentElement.remove();
       }
