@@ -354,7 +354,7 @@
                 </div>
               </div>
             </div>
-            <iframe id="ti-video" src="https://www.youtube-nocookie.com/embed/zHaEQ-tiMZo?si=D4YOdieIYAsYH19z" width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe id="ti-video" width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </div>
         <div id="ti-profiles" class="grid black">
@@ -434,7 +434,7 @@
         document.getElementById("ti-desc").textContent = desc;
       }
 
-      if (data["영상"]) document.getElementById("ti-video").src = data["영상"];
+      if (data["영상"]) document.getElementById("ti-video").src = "https://www.youtube-nocookie.com/embed/"+data["영상"]+"?si=D4YOdieIYAsYH19z";
 
       var teamNames = Object.keys(DATABASE.teams);
       var teamIndex = teamNames.indexOf(teamName);
