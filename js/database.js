@@ -1,4 +1,4 @@
-const USE_LOCAL = false;
+const USE_LOCAL = true;
 
 var DATABASE = {};
 var SHEET_ID = '1dPq1y9cQqf-2d6J56u93y1FHTi5LRtVZ1gpvJcrmzSk';

@@ -489,11 +489,14 @@ th:nth-child(3n) {
     --gnb-padding: 1rem;
   }
   html {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .gnb-dropdown {
     height: calc(100dvh - 6rem);
+  }
+  .gnb-dropdown-links {
+    flex-direction: column;
   }
 
   .gnb-navstuff {
