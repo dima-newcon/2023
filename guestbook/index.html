@@ -46,10 +46,12 @@
       #note-container {
         margin-top: 6rem;
         gap: var(--gnb-padding);
-        flex-direction: row-reverse;
-        justify-content: flex-end;
+        /* flex-direction: row-reverse; */
+        justify-content: flex-start;
         position: relative;
         width: 100%;
+        /* flex-wrap: wrap-reverse; */
+        flex-wrap: wrap;
       }
       .main-cd {
         position: absolute;
@@ -163,7 +165,7 @@
         </div>
 
         <div id="cd"></div>
-        <div id="note-container" class="flexbox wrap">
+        <div id="note-container" class="flexbox">
         </div>
       </div>
     </main>
@@ -226,7 +228,7 @@
 
       note.appendChild(contentElement);
       note.appendChild(nametagElement);
-      noteContainer.appendChild(note);
+      noteContainer.prepend(note);
     }
 
     function write_data() {
