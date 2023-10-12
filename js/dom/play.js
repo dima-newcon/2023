@@ -328,7 +328,7 @@ class DraggableCD {
         for (let button of document.getElementsByClassName("play-button")) {
           button.classList.add("paused");
         }
-      } else {
+      } else if (this.playing) {
         for (let button of document.getElementsByClassName("play-button")) {
           button.classList.remove("paused");
         }
