@@ -73,21 +73,28 @@
         flex-grow: 1;
         position: relative;
         padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
       .prof-address .flexbox {
-        align-items: baseline;
-        position: absolute;
-        bottom: 1.5rem;
-        right: 1.5rem;
-        font-size: .8rem;
         gap: .25em;
+        font-size: .8rem;
+        align-items: baseline;
+      }
+      .prof-address .flexbox.column {
+        align-items: end;
+        width: 100%;
+        gap: .5em;
       }
       .prof-address p {
         font-weight: normal;
+        white-space: pre-wrap;
+        height: 100%;
+        margin-top: 2rem;
       }
       .prof-address h1 {
         font-size: 1rem;
-        margin-bottom: 3rem;
       }
 
       .wrap {
@@ -304,10 +311,17 @@
         </div>
         <div class="prof-address">
           <h1>CONGRATULATORY ADDRESS</h1>
-          <p class="text-justify"></p>
-          <div class="flexbox">
-            <div><span class="big">책임지도</span> | </div>
-            <div>배윤경 교수님</div>
+          <p class="text-justify">‘가치의 재생’ 전시를 진심으로 축하합니다.
+
+이번 전시는 학생들에게 새로운 가치를 창조하고, 스스로에게 예술과 기술의 한계를 뛰어넘는 큰 도전이었을 것입니다. 모든 학생들의 예술성과 열정을 칭찬하고 전시를 준비하는 과정에서 겪었던 어려움들은 여러분의 성장과 발전을 촉진하는 계기가 될 것입니다.
+
+‘가치의 재생’ 전시에 참여한 모든 학생 여러분들의 앞으로의 여정에서도 예술을 통해 새로운 가치를 창조하고 사회에 영감을 주길 바랍니다. 축하합니다!!</p>
+          <div class="flexbox column">
+            <div class="flexbox">
+              <div><span class="big">책임지도</span> | </div>
+              <div>배윤경 교수님</div>
+            </div>
+            <div>동아방송예술대학교 뉴미디어콘텐츠과 학과장</div>
           </div>
         </div>
       </div>

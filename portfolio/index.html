@@ -447,7 +447,12 @@
 
       let imgContainer = document.getElementsByClassName("imgcontainer")[0];
       let imgs = [data["이미지1"], data["이미지2"], data["이미지3"]];
+      let hasImages = false;
       for (let img of imgs) {
+        if (!img) continue;
+
+        hasImages = true;
+
         let el = document.createElement("img");
         el.src = "../res/artists/"+artist+"/"+img;
         el.onclick = function() {
@@ -462,6 +467,9 @@
         }
 
         imgContainer.appendChild(el);
+      }
+      if (!hasImages) {
+        imgContainer.classList.add("gone");
       }
 
       let experiences = data["경험"].split("\n");
