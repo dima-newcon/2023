@@ -110,6 +110,7 @@ html {
 }
 
 main {
+  min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -121,11 +122,13 @@ p {
 body {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
 }
 
 body.nav-dropdown {
+  height: 100vh;
   height: 100dvh;
   overflow: hidden;
 }
@@ -223,6 +226,7 @@ body.nav-dropdown footer {
 }
 .gnb.nav-dropdown {
   display: block;
+  height: 100vh;
   height: 100dvh;
 }
 
@@ -303,6 +307,7 @@ body.nav-dropdown footer {
   margin-top: 2rem;
   border: 1px solid rgba(0,0,0,.1);
   width: 100%;
+  height: calc(100vh - 12rem);
   height: calc(100dvh - 12rem);
   background: conic-gradient(from 90deg at 1px 1px, #0000 90deg, rgba(0,0,0,.1) 0) 0 0/3rem 3rem;
   background-position: 50% 50%;
@@ -438,6 +443,7 @@ main {
 
 .main-cd {
   max-width: 60vw;
+  max-height: 60vh;
   max-height: 60dvh;
   aspect-ratio: 1;
 }
@@ -475,6 +481,7 @@ th:nth-child(3n) {
 }
 .img-dialog img {
   max-width: 90vw;
+  max-height: 70vh;
   max-height: 70dvh;
   margin: auto;
 }
@@ -493,6 +500,7 @@ th:nth-child(3n) {
   }
 
   .gnb-dropdown {
+    height: calc(100vh - 6rem);
     height: calc(100dvh - 6rem);
   }
   .gnb-dropdown-links {
@@ -534,6 +542,7 @@ th:nth-child(3n) {
   }
   .img-dialog img {
     max-width: 100%;
+    max-height: 100vh;
     max-height: 100dvh;
     margin: 0;
   }
@@ -544,6 +553,7 @@ th:nth-child(3n) {
     gap: .5rem 2rem;
   }
   .gnb-dropdown-table td {
+    padding-bottom: 5.5vh;
     padding-bottom: 5.5dvh;
   }
   .gnb-dropdown-table a {
