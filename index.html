@@ -16,6 +16,7 @@
 
       .gnb {
         position: fixed;
+        height: 100vh;
         height: 100dvh;
       }
       body.nav-dropdown main > *,
@@ -37,6 +38,7 @@
         top: 0;
         left: 0;
         width: 100vw;
+        height: 100vh;
         height: 100dvh;
         display: flex;
         flex-direction: row;
@@ -57,6 +59,7 @@
       } */
       .page {
         width: 100vw;
+        height: 100vh;
         height: 100dvh;
         flex-shrink: 0;
         box-sizing: border-box;
@@ -67,6 +70,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding-left: calc(min(30vw, 30vh) + 8rem);
         padding-left: calc(min(30vw, 30dvh) + 8rem);
         padding-right: 8rem;
         gap: 1rem;
@@ -105,6 +109,7 @@
       }
       .footer-image {
         width: 100vw;
+        height: 50vh;
         height: 50dvh;
         margin-bottom: 4rem;
         margin-left: calc(-1 * var(--gnb-padding));
@@ -233,6 +238,7 @@
           padding-bottom: 1rem;
         }
         .footer-image {
+          height: 20vh;
           height: 20dvh;
           margin-bottom: 0;
         }
